@@ -8,11 +8,12 @@ import eg.edu.alexu.csd.oop.draw.DrawingEngine;
 import eg.edu.alexu.csd.oop.draw.Shape;
 
 public class DrawController implements DrawingEngine {
-	ArrayList<Shape> shapes = new ArrayList<Shape>();
-	ArrayList<ArrayList<Shape>> undoStack = new ArrayList<>();
-	ArrayList<ArrayList<Shape>> redoStack = new ArrayList<>();
-	ArrayList<Shape> currentImage = new ArrayList<Shape>();
-	ArrayList<Shape> temp = new ArrayList<Shape>();
+	private ArrayList<Shape> shapes = new ArrayList<Shape>();
+	private ArrayList<ArrayList<Shape>> undoStack = new ArrayList<>();
+	private ArrayList<ArrayList<Shape>> redoStack = new ArrayList<>();
+	private ArrayList<Shape> currentImage = new ArrayList<Shape>();
+	private ArrayList<Shape> temp = new ArrayList<Shape>();
+	private boolean firstDraw = true;
 
 	@Override
 	public void refresh(Graphics canvas) {
@@ -24,7 +25,10 @@ public class DrawController implements DrawingEngine {
 
 	@Override
 	public void addShape(Shape shape) {
-		// undoStack.push(shapes);
+		if(firstDraw) {
+			firstDraw = false;
+			undoStack.add(shapes);
+		}
 		shapes.add(shape);
 		undoStack.add(shapes);
 		if (undoStack.size() > 20) {
@@ -70,15 +74,11 @@ public class DrawController implements DrawingEngine {
 	@Override
 	public void undo() {
 		// TODO Auto-generated method stub
-		if (undoStack.size() > 0) {
+		if (undoStack.size() > 1) {
 			temp = undoStack.remove(undoStack.size() - 1);
 			redoStack.add(temp);
 			// currentImage=undoStack.peek();
-			if (undoStack.size() != 0) {
-				shapes = undoStack.get(undoStack.size() - 1);
-			} else {
-				shapes = new ArrayList<>();
-			}
+				shapes = undoStack.get(undoStack.size() - 1);			
 		}
 	}
 
