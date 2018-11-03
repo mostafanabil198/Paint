@@ -3,44 +3,56 @@ package eg.edu.alexu.csd.oop.draw.cs51_cs17;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Stack;
 
 import eg.edu.alexu.csd.oop.draw.DrawingEngine;
 import eg.edu.alexu.csd.oop.draw.Shape;
 
 public class DrawController implements DrawingEngine {
 	ArrayList<Shape> shapes = new ArrayList<Shape>();
-	Stack<ArrayList<Shape>> undoStack=new Stack<>();
-	Stack<ArrayList<Shape>> redoStack=new Stack<>();
-	ArrayList<Shape> currentImage=new ArrayList<Shape>();
-	ArrayList<Shape> temp=new ArrayList<Shape>();
+	ArrayList<ArrayList<Shape>> undoStack = new ArrayList<>();
+	ArrayList<ArrayList<Shape>> redoStack = new ArrayList<>();
+	ArrayList<Shape> currentImage = new ArrayList<Shape>();
+	ArrayList<Shape> temp = new ArrayList<Shape>();
+
 	@Override
 	public void refresh(Graphics canvas) {
-		// TODO Auto-generated method stub
+		for (Shape shape : shapes) {
+			shape.draw(canvas);
+		}
 
 	}
 
 	@Override
 	public void addShape(Shape shape) {
-		undoStack.push(shapes);
+		// undoStack.push(shapes);
 		shapes.add(shape);
-		undoStack.push(shapes);
+		undoStack.add(shapes);
+		if (undoStack.size() > 20) {
+			undoStack.remove(0);
+		}
 
 	}
 
 	@Override
 	public void removeShape(Shape shape) {
-		undoStack.push(shapes);
+		// undoStack.push(shapes);
 		shapes.remove(shape);
-		undoStack.push(shapes);
+		undoStack.add(shapes);
+		if (undoStack.size() > 20) {
+			undoStack.remove(0);
+		}
 	}
 
 	@Override
 	public void updateShape(Shape oldShape, Shape newShape) {
-		undoStack.push(shapes);
+		// undoStack.push(shapes);
+		int index = shapes.indexOf(oldShape);
 		shapes.remove(oldShape);
-		shapes.add(newShape);
-		undoStack.push(shapes);
+		shapes.add(index, newShape);
+		undoStack.add(shapes);
+		if (undoStack.size() > 20) {
+			undoStack.remove(0);
+		}
 	}
 
 	@Override
@@ -51,22 +63,30 @@ public class DrawController implements DrawingEngine {
 
 	@Override
 	public List<Class<? extends Shape>> getSupportedShapes() {
-		// TODO Auto-generated method stub
+
 		return null;
 	}
 
 	@Override
 	public void undo() {
 		// TODO Auto-generated method stub
-      temp=undoStack.pop();
-      redoStack.push(temp);
-      currentImage=undoStack.peek();
+		if (undoStack.size() > 0) {
+			temp = undoStack.remove(undoStack.size() - 1);
+			redoStack.add(temp);
+			// currentImage=undoStack.peek();
+			if (undoStack.size() != 0) {
+				shapes = undoStack.get(undoStack.size() - 1);
+			} else {
+				shapes = new ArrayList<>();
+			}
+		}
 	}
 
 	@Override
 	public void redo() {
-		currentImage=redoStack.pop();
-		undoStack.push(currentImage);
+		// currentImage=redoStack.pop();
+		shapes = redoStack.remove(redoStack.size() - 1);
+		undoStack.add(shapes);
 	}
 
 	@Override
