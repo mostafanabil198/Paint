@@ -13,104 +13,7 @@ import java.util.List;
 
 import eg.edu.alexu.csd.oop.draw.DrawingEngine;
 import eg.edu.alexu.csd.oop.draw.Shape;
-<<<<<<< HEAD
 import eg.edu.alexu.csd.oop.draw.cs51_cs17.files.JsonController;
-
-public class DrawController implements DrawingEngine {
-	private ArrayList<Shape> shapes = new ArrayList<Shape>();
-	private ArrayList<ArrayList<Shape>> undoStack = new ArrayList<>();
-	private ArrayList<ArrayList<Shape>> redoStack = new ArrayList<>();
-	private ArrayList<Shape> currentImage = new ArrayList<Shape>();
-	private ArrayList<Shape> temp = new ArrayList<Shape>();
-	private boolean firstDraw = true;
-	JsonController json=new JsonController();
-
-	@Override
-	public void refresh(Graphics canvas) {
-		for (Shape shape : shapes) {
-			shape.draw(canvas);
-		}
-
-	}
-
-	@Override
-	public void addShape(Shape shape) {
-		if(firstDraw) {
-			firstDraw = false;
-			undoStack.add(shapes);
-		}
-		shapes.add(shape);
-		undoStack.add(shapes);
-		if (undoStack.size() > 20) {
-			undoStack.remove(0);
-		}
-
-	}
-
-	@Override
-	public void removeShape(Shape shape) {
-		// undoStack.push(shapes);
-		shapes.remove(shape);
-		undoStack.add(shapes);
-		if (undoStack.size() > 20) {
-			undoStack.remove(0);
-		}
-	}
-
-	@Override
-	public void updateShape(Shape oldShape, Shape newShape) {
-		// undoStack.push(shapes);
-		int index = shapes.indexOf(oldShape);
-		shapes.remove(oldShape);
-		shapes.add(index, newShape);
-		undoStack.add(shapes);
-		if (undoStack.size() > 20) {
-			undoStack.remove(0);
-		}
-	}
-
-	@Override
-	public Shape[] getShapes() {
-		Shape[] shapeArray = shapes.toArray(new Shape[0]);
-		return shapeArray;
-	}
-
-	@Override
-	public List<Class<? extends Shape>> getSupportedShapes() {
-
-		return null;
-	}
-
-	@Override
-	public void undo() {
-		// TODO Auto-generated method stub
-		if (undoStack.size() > 1) {
-			temp = undoStack.remove(undoStack.size() - 1);
-			redoStack.add(temp);
-			// currentImage=undoStack.peek();
-				shapes = undoStack.get(undoStack.size() - 1);			
-		}
-	}
-
-	@Override
-	public void redo() {
-		// currentImage=redoStack.pop();
-		shapes = redoStack.remove(redoStack.size() - 1);
-		undoStack.add(shapes);
-	}
-
-	@Override
-	public void save(String path) {
-		json.saveJson(path, shapes);
-
-	}
-
-	@Override
-	public void load(String path) {
-		// TODO Auto-generated method stub
-
-	}
-=======
 import eg.edu.alexu.csd.oop.draw.cs51_cs17.files.XmlController;
 
 public class DrawController implements DrawingEngine {
@@ -121,6 +24,7 @@ public class DrawController implements DrawingEngine {
     private ArrayList<Shape> temp = new ArrayList<Shape>();
     private boolean firstDraw = true;
     XmlController xmlController = new XmlController();
+    JsonController json = new JsonController();
 
     @Override
     public void refresh(Graphics canvas) {
@@ -202,7 +106,11 @@ public class DrawController implements DrawingEngine {
     @Override
     public void save(String path) {
         try {
-            xmlController.saveXml(shapes, path);
+            if (path.toLowerCase().contains(".xml")) {
+                xmlController.saveXml(shapes, path);
+            } else if (path.toLowerCase().contains(".json")) {
+                json.saveJson(path, shapes);
+            }
         } catch (IOException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -213,7 +121,11 @@ public class DrawController implements DrawingEngine {
     @Override
     public void load(String path) {
         try {
-            xmlController.loadXml(shapes, path);
+            if (path.toLowerCase().contains(".xml")) {
+                xmlController.loadXml(shapes, path);
+            } else if (path.toLowerCase().contains(".json")) {
+
+            }
 //            undoStack.clear();
 //            firstDraw = true;
 //            redoStack.clear();
@@ -236,7 +148,5 @@ public class DrawController implements DrawingEngine {
     public void installPluginShape(String jarPath) {
 
     }
-
->>>>>>> bbc26d69fb73b83499d7752f70178d7b22f4ce39
 
 }
