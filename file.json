@@ -1,0 +1,18 @@
+{
+"Square":{
+"id":"eg.edu.alexu.csd.oop.draw.cs51_cs17.shapes.Square",
+"centerY": 25.0,
+"color": 100.0,
+"centerX": 17.0,
+"width": 50.0,
+"height": 70.0
+}
+"Circle":{
+"id":"eg.edu.alexu.csd.oop.draw.cs51_cs17.shapes.Circle",
+"centerY": 245.0,
+"color": 500.0,
+"centerX": 99.0,
+"width": 3.0,
+"height": 55.0
+}
+}

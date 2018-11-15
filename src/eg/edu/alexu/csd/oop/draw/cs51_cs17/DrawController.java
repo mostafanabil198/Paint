@@ -6,6 +6,7 @@ import java.util.List;
 
 import eg.edu.alexu.csd.oop.draw.DrawingEngine;
 import eg.edu.alexu.csd.oop.draw.Shape;
+import eg.edu.alexu.csd.oop.draw.cs51_cs17.files.JsonController;
 
 public class DrawController implements DrawingEngine {
 	private ArrayList<Shape> shapes = new ArrayList<Shape>();
@@ -14,6 +15,7 @@ public class DrawController implements DrawingEngine {
 	private ArrayList<Shape> currentImage = new ArrayList<Shape>();
 	private ArrayList<Shape> temp = new ArrayList<Shape>();
 	private boolean firstDraw = true;
+	JsonController json=new JsonController();
 
 	@Override
 	public void refresh(Graphics canvas) {
@@ -91,7 +93,7 @@ public class DrawController implements DrawingEngine {
 
 	@Override
 	public void save(String path) {
-		// TODO Auto-generated method stub
+		json.saveJson(path, shapes);
 
 	}
 
