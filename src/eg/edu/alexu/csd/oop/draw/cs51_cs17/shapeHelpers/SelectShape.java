@@ -40,13 +40,11 @@ public class SelectShape {
 		double topX = s.getProperties().get("centerX");
 		double topY = s.getProperties().get("centerY");
 		double radius = s.getProperties().get("width");
-		double centerX = (topX + radius) / 2;
-		double centerY = (topY + radius) / 2;
-		double reqx = Math.abs(x - centerX);
-		double reqy = Math.abs(y - centerY);
-		double lenx = Math.abs(topX - centerX);
-		double leny = Math.abs(topY - centerY);
-		if (Math.sqrt(reqx * reqx + reqy * reqy) <= Math.sqrt(lenx * lenx + leny * leny)) {
+		double centerX = (topX + radius);
+		double centerY = (topY - radius);
+		double diffx = Math.abs(x - centerX);
+		double diffy = Math.abs(y - centerY);
+		if (diffx * diffx + diffy * diffy <= radius * radius) {
 			return s;
 		}
 		return null;
@@ -57,12 +55,28 @@ public class SelectShape {
 		double topY = s.getProperties().get("centerY");
 		double radiusA = s.getProperties().get("width");
 		double radiusB = s.getProperties().get("height");
-
+		double centerX = topX + radiusA / 2;
+		double centerY = topY - radiusB / 2;
+		double diffX = Math.abs(x - centerX);
+		double diffY = Math.abs(y - centerY);
+		if ((diffX * diffX / radiusA * radiusA + diffY * diffY / radiusB * radiusB) <= 1) {
+			return s;
+		}
 		return null;
 	}
 
 	private Shape selectLine(Shape s, float x, float y) {
-		return null;
+		double sPointX = s.getProperties().get("point1X");
+		double sPointY = s.getProperties().get("point1Y");
+		double endPointX = s.getProperties().get("point2X");
+		double endPointY = s.getProperties().get("point2Y");
+		double firstRatio = x - sPointX / y - endPointX;
+		double secondRatio = endPointX - sPointX / endPointY - sPointY;
+		if (firstRatio == secondRatio) {
+			return s;
+		} else {
+			return null;
+		}
 	}
 
 	private Shape selectTriangle(Shape s, float x, float y) {
