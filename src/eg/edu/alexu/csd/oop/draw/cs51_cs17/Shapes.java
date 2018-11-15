@@ -65,7 +65,7 @@ public abstract class Shapes implements Shape {
 
 	@Override
 	public Object clone() throws CloneNotSupportedException {
-		return null;
+		return this;
 	}
 
 }
