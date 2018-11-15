@@ -1,5 +1,7 @@
 package eg.edu.alexu.csd.oop.draw.cs51_cs17.shapeHelpers;
 
+import java.util.Map;
+
 import eg.edu.alexu.csd.oop.draw.Shape;
 
 public class SelectShape {
@@ -35,10 +37,27 @@ public class SelectShape {
 	}
 
 	private Shape selectCircle(Shape s, float x, float y) {
+		double topX = s.getProperties().get("centerX");
+		double topY = s.getProperties().get("centerY");
+		double radius = s.getProperties().get("width");
+		double centerX = (topX + radius) / 2;
+		double centerY = (topY + radius) / 2;
+		double reqx = Math.abs(x - centerX);
+		double reqy = Math.abs(y - centerY);
+		double lenx = Math.abs(topX - centerX);
+		double leny = Math.abs(topY - centerY);
+		if (Math.sqrt(reqx * reqx + reqy * reqy) <= Math.sqrt(lenx * lenx + leny * leny)) {
+			return s;
+		}
 		return null;
 	}
 
 	private Shape selectEllipse(Shape s, float x, float y) {
+		double topX = s.getProperties().get("centerX");
+		double topY = s.getProperties().get("centerY");
+		double radiusA = s.getProperties().get("width");
+		double radiusB = s.getProperties().get("height");
+
 		return null;
 	}
 
