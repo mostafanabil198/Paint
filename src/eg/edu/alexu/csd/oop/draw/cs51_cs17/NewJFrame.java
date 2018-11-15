@@ -8,6 +8,7 @@ package eg.edu.alexu.csd.oop.draw.cs51_cs17;
 import eg.edu.alexu.csd.oop.draw.DrawingEngine;
 import eg.edu.alexu.csd.oop.draw.Shape;
 import eg.edu.alexu.csd.oop.draw.cs51_cs17.shapes.Circle;
+import eg.edu.alexu.csd.oop.draw.cs51_cs17.shapes.Ellipse;
 import eg.edu.alexu.csd.oop.draw.cs51_cs17.shapes.Rectangle;
 import eg.edu.alexu.csd.oop.draw.cs51_cs17.shapes.Triangle;
 import java.awt.Color;
@@ -137,34 +138,33 @@ public class NewJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
     float x1, y1, x2, y2;
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-//        x1 = evt.getXOnScreen();
-//        y1 = evt.getYOnScreen();
-//         s = new Circle();
-//        Map<String, Double> m = new HashMap<>();
-//        m.put("width", Double.parseDouble(String.valueOf(0)));
-//        m.put("height", Double.parseDouble(String.valueOf(0)));
-//        m.put("centerX", Double.parseDouble(String.valueOf(x1)));
-//        m.put("centerY", Double.parseDouble(String.valueOf(y1)));
-//        m.put("shapeColor", Double.parseDouble(String.valueOf((Color.RED).getRGB())));
-//        m.put("fillColor", Double.parseDouble(String.valueOf((Color.black).getRGB())));
-//        s.setProperties(m);
-//        d.addShape(s);
-
         x1 = evt.getXOnScreen();
         y1 = evt.getYOnScreen();
-        s = new Triangle();
+        s = new Ellipse();
         Map<String, Double> m = new HashMap<>();
-        m.put("point1X", Double.parseDouble(String.valueOf(x1)));
-        m.put("point1Y", Double.parseDouble(String.valueOf(y1)));
-        m.put("point2X", Double.parseDouble(String.valueOf(x1)));
-        m.put("point2Y", Double.parseDouble(String.valueOf(y1)));
-        m.put("point3X", Double.parseDouble(String.valueOf(x1)));
-        m.put("point3Y", Double.parseDouble(String.valueOf(y1)));
+        m.put("width", Double.parseDouble(String.valueOf(0)));
+        m.put("height", Double.parseDouble(String.valueOf(0)));
+        m.put("centerX", Double.parseDouble(String.valueOf(x1)));
+        m.put("centerY", Double.parseDouble(String.valueOf(y1)));
         m.put("shapeColor", Double.parseDouble(String.valueOf((Color.RED).getRGB())));
         m.put("fillColor", Double.parseDouble(String.valueOf((Color.black).getRGB())));
         s.setProperties(m);
         d.addShape(s);
-
+        repaint();
+//        x1 = evt.getXOnScreen();
+//        y1 = evt.getYOnScreen();
+//        s = new Triangle();
+//        Map<String, Double> m = new HashMap<>();
+//        m.put("point1X", Double.parseDouble(String.valueOf(x1)));
+//        m.put("point1Y", Double.parseDouble(String.valueOf(y1)));
+//        m.put("point2X", Double.parseDouble(String.valueOf(x1)));
+//        m.put("point2Y", Double.parseDouble(String.valueOf(y1)));
+//        m.put("point3X", Double.parseDouble(String.valueOf(x1)));
+//        m.put("point3Y", Double.parseDouble(String.valueOf(y1)));
+//        m.put("shapeColor", Double.parseDouble(String.valueOf((Color.RED).getRGB())));
+//        m.put("fillColor", Double.parseDouble(String.valueOf((Color.black).getRGB())));
+//        s.setProperties(m);
+//        d.addShape(s);
 
     }//GEN-LAST:event_formMousePressed
     Shape s;
@@ -181,7 +181,7 @@ public class NewJFrame extends javax.swing.JFrame {
 //        m.put("fillColor", Double.parseDouble(String.valueOf((Color.black).getRGB())));
 //        s.setProperties(m);
 //        
-        
+
 //         x2 = evt.getXOnScreen();
 //        y2 = evt.getYOnScreen();
 //        float difX,difY;
@@ -215,23 +215,37 @@ public class NewJFrame extends javax.swing.JFrame {
 //        s.setProperties(m);
 //
 //        repaint();
-        
-          x2 = evt.getXOnScreen();
+//        
+//          x2 = evt.getXOnScreen();
+//        y2 = evt.getYOnScreen();
+//        float difX,difY;
+//        difX = x2 - x1;
+//        difY = y2 - y1;
+//       // s = new Triangle();
+//        Map<String, Double> m = new HashMap<>();
+//        m.put("point1X", Double.parseDouble(String.valueOf(x1 + .5 * difX)));
+//        m.put("point1Y", Double.parseDouble(String.valueOf(y1)));
+//        m.put("point2X", Double.parseDouble(String.valueOf(x1)));
+//        m.put("point2Y", Double.parseDouble(String.valueOf(y2)));
+//        m.put("point3X", Double.parseDouble(String.valueOf(x2)));
+//        m.put("point3Y", Double.parseDouble(String.valueOf(y2)));
+//        m.put("shapeColor", Double.parseDouble(String.valueOf((Color.RED).getRGB())));
+//        m.put("fillColor", Double.parseDouble(String.valueOf((Color.black).getRGB())));
+//        s.setProperties(m);
+//        repaint();
+
+        x2 = evt.getXOnScreen();
         y2 = evt.getYOnScreen();
-        float difX,difY;
-        difX = x2 - x1;
-        difY = y2 - y1;
-       // s = new Triangle();
+        // Shape s = new Rectangle();
         Map<String, Double> m = new HashMap<>();
-        m.put("point1X", Double.parseDouble(String.valueOf(x1 + .5 * difX)));
-        m.put("point1Y", Double.parseDouble(String.valueOf(y1)));
-        m.put("point2X", Double.parseDouble(String.valueOf(x1)));
-        m.put("point2Y", Double.parseDouble(String.valueOf(y2)));
-        m.put("point3X", Double.parseDouble(String.valueOf(x2)));
-        m.put("point3Y", Double.parseDouble(String.valueOf(y2)));
+        m.put("width", Double.parseDouble(String.valueOf(x2 - x1)));
+        m.put("height", Double.parseDouble(String.valueOf(y2 - y1)));
+        m.put("centerX", Double.parseDouble(String.valueOf(x1)));
+        m.put("centerY", Double.parseDouble(String.valueOf(y1)));
         m.put("shapeColor", Double.parseDouble(String.valueOf((Color.RED).getRGB())));
         m.put("fillColor", Double.parseDouble(String.valueOf((Color.black).getRGB())));
         s.setProperties(m);
+        //d.addShape(s);
         repaint();
     }//GEN-LAST:event_formMouseDragged
 

@@ -24,7 +24,6 @@ public class Line extends Shapes {
 
 	}
 	
-	
 	@Override
 	public void draw(Graphics canvas) {
 		Map<String, Double> m = getProperties();
