@@ -7,6 +7,9 @@ package eg.edu.alexu.csd.oop.draw.cs51_cs17;
 
 import eg.edu.alexu.csd.oop.draw.DrawingEngine;
 import eg.edu.alexu.csd.oop.draw.Shape;
+import eg.edu.alexu.csd.oop.draw.cs51_cs17.gui.Canvas;
+import eg.edu.alexu.csd.oop.draw.cs51_cs17.gui.GuiLogic;
+import eg.edu.alexu.csd.oop.draw.cs51_cs17.shapeHelpers.SelectShape;
 import eg.edu.alexu.csd.oop.draw.cs51_cs17.shapes.Circle;
 import eg.edu.alexu.csd.oop.draw.cs51_cs17.shapes.Ellipse;
 import eg.edu.alexu.csd.oop.draw.cs51_cs17.shapes.Rectangle;
@@ -43,6 +46,12 @@ public class NewJFrame extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
+        jButton9 = new javax.swing.JButton();
+        jPanel1 = new Canvas(controller);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
@@ -61,212 +70,203 @@ public class NewJFrame extends javax.swing.JFrame {
                 formMouseReleased(evt);
             }
         });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("jButton1");
+        jButton1.setText("undo");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(790, 52, -1, -1));
 
-        jButton2.setText("jButton2");
+        jButton2.setText("redo");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(921, 111, -1, -1));
 
-        jButton3.setText("jButton3");
+        jButton3.setText("save");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(876, 57, -1, -1));
 
-        jButton4.setText("jButton4");
+        jButton4.setText("load");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1031, 70, -1, -1));
 
         jTextField1.setText("jTextField1");
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(932, 13, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jButton1)
-                .addGap(73, 73, 73)
-                .addComponent(jButton2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 568, Short.MAX_VALUE)
-                .addComponent(jButton3)
-                .addGap(96, 96, 96)
-                .addComponent(jButton4)
-                .addGap(54, 54, 54))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(141, 141, 141))
+        jButton5.setText("jButton5");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(830, 120, -1, -1));
+
+        jButton6.setText("select");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 25, -1, -1));
+
+        jButton7.setText("!select");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton7, new org.netbeans.lib.awtextra.AbsoluteConstraints(712, 25, -1, -1));
+
+        jButton8.setText("move");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton8, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 110, -1, -1));
+
+        jButton9.setText("resize");
+        jButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton9ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton9, new org.netbeans.lib.awtextra.AbsoluteConstraints(692, 57, -1, -1));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 640, Short.MAX_VALUE)
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
-                            .addComponent(jButton2)
-                            .addComponent(jButton4)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(22, 22, 22)
-                        .addComponent(jButton3)))
-                .addContainerGap(615, Short.MAX_VALUE))
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 700, Short.MAX_VALUE)
         );
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 700));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    boolean select = false;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        d.undo();
+        controller.undo();
         repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
-    float x1, y1, x2, y2;
+    float x1, y1, x2, y2, topleftX, topLeftY;
+    GuiLogic guiLogic = new GuiLogic();
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
         x1 = evt.getXOnScreen();
         y1 = evt.getYOnScreen();
-        s = new Ellipse();
-        Map<String, Double> m = new HashMap<>();
-        m.put("width", Double.parseDouble(String.valueOf(0)));
-        m.put("height", Double.parseDouble(String.valueOf(0)));
-        m.put("centerX", Double.parseDouble(String.valueOf(x1)));
-        m.put("centerY", Double.parseDouble(String.valueOf(y1)));
-        m.put("shapeColor", Double.parseDouble(String.valueOf((Color.RED).getRGB())));
-        m.put("fillColor", Double.parseDouble(String.valueOf((Color.black).getRGB())));
-        s.setProperties(m);
-        d.addShape(s);
-        repaint();
-//        x1 = evt.getXOnScreen();
-//        y1 = evt.getYOnScreen();
-//        s = new Triangle();
-//        Map<String, Double> m = new HashMap<>();
-//        m.put("point1X", Double.parseDouble(String.valueOf(x1)));
-//        m.put("point1Y", Double.parseDouble(String.valueOf(y1)));
-//        m.put("point2X", Double.parseDouble(String.valueOf(x1)));
-//        m.put("point2Y", Double.parseDouble(String.valueOf(y1)));
-//        m.put("point3X", Double.parseDouble(String.valueOf(x1)));
-//        m.put("point3Y", Double.parseDouble(String.valueOf(y1)));
-//        m.put("shapeColor", Double.parseDouble(String.valueOf((Color.RED).getRGB())));
-//        m.put("fillColor", Double.parseDouble(String.valueOf((Color.black).getRGB())));
-//        s.setProperties(m);
-//        d.addShape(s);
+        if (!select && !move && !resize) {
+            s = guiLogic.generateShape("Square");
+            guiLogic.drawShapes(s, x1, y1, x1, y1, Color.yellow, Color.BLACK);
+            controller.addShape(s);
+            repaint();
+        } else if (move && !select && !resize) {
+            guiLogic.moveShape(selectedShape, x1, y1);
+            repaint();
+        } else if (resize) {
+            guiLogic.resizeShape(selectedShape, x1, y1, false);
+            repaint();
+
+        }
 
     }//GEN-LAST:event_formMousePressed
     Shape s;
+    boolean resize = false;
     private void formMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseReleased
-//        x2 = evt.getXOnScreen();
-//        y2 = evt.getYOnScreen();
-//        //s = new Rectangle();
-//        Map<String, Double> m = new HashMap<>();
-//        m.put("width", Double.parseDouble(String.valueOf(x2 - x1)));
-//        m.put("height", Double.parseDouble(String.valueOf(x2 - x1)));
-//        m.put("centerX", Double.parseDouble(String.valueOf(x1)));
-//        m.put("centerY", Double.parseDouble(String.valueOf(y1)));
-//        m.put("shapeColor", Double.parseDouble(String.valueOf((Color.RED).getRGB())));
-//        m.put("fillColor", Double.parseDouble(String.valueOf((Color.black).getRGB())));
-//        s.setProperties(m);
-//        
-
-//         x2 = evt.getXOnScreen();
-//        y2 = evt.getYOnScreen();
-//        float difX,difY;
-//        difX = x2 - x1;
-//        difY = y2 - y1;
-//        //s = new Triangle();
-//        Map<String, Double> m = new HashMap<>();
-//        m.put("point1X", Double.parseDouble(String.valueOf(x1 + .5 * difX)));
-//        m.put("point1Y", Double.parseDouble(String.valueOf(y1)));
-//        m.put("point2X", Double.parseDouble(String.valueOf(x1)));
-//        m.put("point2Y", Double.parseDouble(String.valueOf(y2)));
-//        m.put("point3X", Double.parseDouble(String.valueOf(x2)));
-//        m.put("point3Y", Double.parseDouble(String.valueOf(y2)));
-//        m.put("shapeColor", Double.parseDouble(String.valueOf((Color.RED).getRGB())));
-//        m.put("fillColor", Double.parseDouble(String.valueOf((Color.black).getRGB())));
-//        s.setProperties(m);
-//        repaint();
+// 
     }//GEN-LAST:event_formMouseReleased
 
     private void formMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseDragged
-//        x2 = evt.getXOnScreen();
-//        y2 = evt.getYOnScreen();
-//        // Shape s = new Rectangle();
-//        Map<String, Double> m = new HashMap<>();
-//        m.put("width", Double.parseDouble(String.valueOf(x2 - x1)));
-//        m.put("height", Double.parseDouble(String.valueOf(x2 - x1)));
-//        m.put("centerX", Double.parseDouble(String.valueOf(x1)));
-//        m.put("centerY", Double.parseDouble(String.valueOf(y1)));
-//        m.put("shapeColor", Double.parseDouble(String.valueOf((Color.RED).getRGB())));
-//        m.put("fillColor", Double.parseDouble(String.valueOf((Color.black).getRGB())));
-//        s.setProperties(m);
-//
-//        repaint();
-//        
-//          x2 = evt.getXOnScreen();
-//        y2 = evt.getYOnScreen();
-//        float difX,difY;
-//        difX = x2 - x1;
-//        difY = y2 - y1;
-//       // s = new Triangle();
-//        Map<String, Double> m = new HashMap<>();
-//        m.put("point1X", Double.parseDouble(String.valueOf(x1 + .5 * difX)));
-//        m.put("point1Y", Double.parseDouble(String.valueOf(y1)));
-//        m.put("point2X", Double.parseDouble(String.valueOf(x1)));
-//        m.put("point2Y", Double.parseDouble(String.valueOf(y2)));
-//        m.put("point3X", Double.parseDouble(String.valueOf(x2)));
-//        m.put("point3Y", Double.parseDouble(String.valueOf(y2)));
-//        m.put("shapeColor", Double.parseDouble(String.valueOf((Color.RED).getRGB())));
-//        m.put("fillColor", Double.parseDouble(String.valueOf((Color.black).getRGB())));
-//        s.setProperties(m);
-//        repaint();
-
         x2 = evt.getXOnScreen();
         y2 = evt.getYOnScreen();
-        // Shape s = new Rectangle();
-        Map<String, Double> m = new HashMap<>();
-        m.put("width", Double.parseDouble(String.valueOf(x2 - x1)));
-        m.put("height", Double.parseDouble(String.valueOf(y2 - y1)));
-        m.put("centerX", Double.parseDouble(String.valueOf(x1)));
-        m.put("centerY", Double.parseDouble(String.valueOf(y1)));
-        m.put("shapeColor", Double.parseDouble(String.valueOf((Color.RED).getRGB())));
-        m.put("fillColor", Double.parseDouble(String.valueOf((Color.black).getRGB())));
-        s.setProperties(m);
-        //d.addShape(s);
-        repaint();
+        if (!select && !move && !resize) {
+            guiLogic.drawShapes(s, x1, y1, x2, y2, Color.yellow, Color.BLACK);
+            repaint();
+        } else if (move && !select && !resize) {
+            guiLogic.moveShape(selectedShape, x2, y2);
+            repaint();
+        } else if (resize) {
+            guiLogic.resizeShape(selectedShape, x2, y2, true);
+            repaint();
+        }
     }//GEN-LAST:event_formMouseDragged
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        d.redo();
+        controller.redo();
         repaint();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        d.save(jTextField1.getText());
+        controller.save(jTextField1.getText());
         repaint();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        d.load(jTextField1.getText());
+        controller.load(jTextField1.getText());
         repaint();
     }//GEN-LAST:event_jButton4ActionPerformed
-
+    SelectShape select1 = new SelectShape();
+    Shape selectedShape = null;
     private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
-
+        if (select && !move) {
+            selectedShape = select1.selectShape(evt.getXOnScreen(), evt.getYOnScreen(), controller.getShapes());
+            if (selectedShape == null) {
+                System.out.println("null !");
+            } else {
+                selectedShape.getProperties().put("shapeColor", Double.parseDouble(String.valueOf((Color.BLUE).getRGB())));
+                selectedShape.getProperties().put("fillColor", Double.parseDouble(String.valueOf((Color.BLUE).getRGB())));
+                repaint();
+            }
+        }
     }//GEN-LAST:event_formMouseClicked
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        controller.getShapes()[0].getProperties().put("shapeColor", Double.parseDouble(String.valueOf((Color.BLUE).getRGB())));
+        controller.getShapes()[0].getProperties().put("fillColor", Double.parseDouble(String.valueOf((Color.BLUE).getRGB())));
+        repaint();
+    }//GEN-LAST:event_jButton5ActionPerformed
+    boolean move = false;
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        select = true;
+        move = false;
+        resize = false;
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        select = false;
+        move = false;
+        resize = false;
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        move = true;
+        select = false;
+        resize = false;
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        resize = true;
+        move = false;
+        select = false;
+    }//GEN-LAST:event_jButton9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -303,17 +303,23 @@ public class NewJFrame extends javax.swing.JFrame {
         });
     }
 
-    DrawingEngine d = new DrawController();
+    DrawingEngine controller = new DrawController();
 
-    public void paint(Graphics g) {
-        super.paint(g); //To change body of generated methods, choose Tools | Templates.
-        d.refresh(g);
-    }
+//    public void paint(Graphics g) {
+//        super.paint(g); //To change body of generated methods, choose Tools | Templates.
+//        controller.refresh(g);
+//    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JButton jButton9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

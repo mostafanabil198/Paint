@@ -15,6 +15,8 @@ import eg.edu.alexu.csd.oop.draw.DrawingEngine;
 import eg.edu.alexu.csd.oop.draw.Shape;
 import eg.edu.alexu.csd.oop.draw.cs51_cs17.files.JsonController;
 import eg.edu.alexu.csd.oop.draw.cs51_cs17.files.XmlController;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DrawController implements DrawingEngine {
 
@@ -63,7 +65,7 @@ public class DrawController implements DrawingEngine {
     public void updateShape(Shape oldShape, Shape newShape) {
         redoStack.clear();
         int index = shapes.indexOf(oldShape);
-        shapes.remove(oldShape);
+        System.out.println(shapes.remove(oldShape));
         shapes.add(index, newShape);
         undoStack.add(addNewChange(shapes));
         if (undoStack.size() > 21) {
@@ -142,10 +144,12 @@ public class DrawController implements DrawingEngine {
             newList.add(shape);
         }
         return newList;
+
     }
 
     @Override
-    public void installPluginShape(String jarPath) {
+    public void installPluginShape(String jarPath
+    ) {
 
     }
 

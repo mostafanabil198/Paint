@@ -1,18 +1,58 @@
+<Square
+id="eg.edu.alexu.csd.oop.draw.cs51_cs17.shapes.Square"
+fillColor="-1.6777216E7"
+centerY="58.0"
+centerX="148.0"
+shapeColor="-1.6777216E7"
+width="280.0"
+height="280.0"
+> </Square>
+<Rectangle
+id="eg.edu.alexu.csd.oop.draw.cs51_cs17.shapes.Rectangle"
+fillColor="-1.6777216E7"
+centerY="90.0"
+centerX="606.0"
+shapeColor="-1.6777216E7"
+width="1060.0"
+height="237.0"
+> </Rectangle>
+<Rectangle
+id="eg.edu.alexu.csd.oop.draw.cs51_cs17.shapes.Rectangle"
+fillColor="-1.6777216E7"
+centerY="398.0"
+centerX="179.0"
+shapeColor="-1.6777216E7"
+width="107.0"
+height="358.0"
+> </Rectangle>
+<Triangle
+id="eg.edu.alexu.csd.oop.draw.cs51_cs17.shapes.Triangle"
+fillColor="-1.6777216E7"
+centerY="438.0"
+centerX="612.0"
+shapeColor="-1.6777216E7"
+point1Y="438.0"
+point1X="890.5"
+point2Y="758.0"
+point2X="612.0"
+point3Y="758.0"
+point3X="1169.0"
+> </Triangle>
 <Circle
 id="eg.edu.alexu.csd.oop.draw.cs51_cs17.shapes.Circle"
 fillColor="-1.6777216E7"
-centerY="194.0"
-centerX="122.0"
-shapeColor="-65536.0"
-width="183.0"
-height="183.0"
+centerY="393.0"
+centerX="433.0"
+shapeColor="-1.6777216E7"
+width="189.0"
+height="189.0"
 > </Circle>
-<Circle
-id="eg.edu.alexu.csd.oop.draw.cs51_cs17.shapes.Circle"
+<Ellipse
+id="eg.edu.alexu.csd.oop.draw.cs51_cs17.shapes.Ellipse"
 fillColor="-1.6777216E7"
-centerY="315.0"
-centerX="477.0"
-shapeColor="-65536.0"
-width="178.0"
-height="178.0"
-> </Circle>
+centerY="407.0"
+centerX="1144.0"
+shapeColor="-1.6777216E7"
+width="537.0"
+height="208.0"
+> </Ellipse>
