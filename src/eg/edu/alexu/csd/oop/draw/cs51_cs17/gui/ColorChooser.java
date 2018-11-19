@@ -6,6 +6,8 @@
 package eg.edu.alexu.csd.oop.draw.cs51_cs17.gui;
 
 import java.awt.Color;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
@@ -84,7 +86,11 @@ public class ColorChooser extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Color color = jColorChooser1.getColor();
-        form.setColorFor(colorFor, color);
+        try {
+            form.setColorFor(colorFor, color);
+        } catch (CloneNotSupportedException ex) {
+            Logger.getLogger(ColorChooser.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

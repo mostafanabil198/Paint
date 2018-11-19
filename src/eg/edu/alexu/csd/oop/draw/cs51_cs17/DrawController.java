@@ -81,6 +81,22 @@ public class DrawController implements DrawingEngine {
 
     @Override
     public List<Class<? extends Shape>> getSupportedShapes() {
+    	try {
+			Class cls = Class.forName("RoundRectangle");
+			try {
+				Object obj=cls.newInstance();
+			} catch (InstantiationException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
         return null;
 
     }
