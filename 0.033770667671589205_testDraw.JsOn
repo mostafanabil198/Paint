@@ -1,0 +1,19 @@
+{
+"RoundRectangle":{
+"id":"eg.edu.alexu.csd.oop.draw.RoundRectangle",
+"Length": 0.0,
+"ArcWidth": 0.0,
+"ArcLength": 0.0,
+"Width": 0.0 
+},
+"RoundRectangle":{
+"id":"eg.edu.alexu.csd.oop.draw.RoundRectangle",
+"Length": 0.0,
+"ArcWidth": 0.0,
+"ArcLength": 0.0,
+"Width": 0.0 
+},
+"DummyShape":{
+"id":"eg.edu.alexu.csd.oop.test.DummyShape",
+}
+}

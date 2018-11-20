@@ -15,8 +15,10 @@ public abstract class Ellipticals extends Shapes {
 		canvas.drawOval(m.get("centerX").intValue(), m.get("centerY").intValue(), m.get("width").intValue(),
 				m.get("height").intValue());
 		canvas.setColor(new Color(m.get("fillColor").intValue()));
+                if(m.get("fillColor") != Integer.MAX_VALUE){
 		canvas.fillOval(m.get("centerX").intValue(), m.get("centerY").intValue(), m.get("width").intValue(),
 				m.get("height").intValue());
+                }
 	}
 
 }

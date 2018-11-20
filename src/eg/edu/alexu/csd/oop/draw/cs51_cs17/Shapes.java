@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 public abstract class Shapes implements Shape {
 
-    private Map<String, Double> shapeProperties;
+    private Map<String, Double> shapeProperties = new HashMap<>();
 
     @Override
     public void setPosition(Point position) {

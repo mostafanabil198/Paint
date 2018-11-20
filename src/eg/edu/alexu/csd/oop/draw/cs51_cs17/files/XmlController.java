@@ -11,6 +11,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -27,10 +28,12 @@ public class XmlController {
 			bw.append("id=\"" + shape.getClass().getName() + "\"");
 			bw.newLine();
 			Map<String, Double> properties = shape.getProperties();
-			Set<String> propertiesKeys = properties.keySet();
-			for (String key : propertiesKeys) {
-				bw.append(key + "=\"" + properties.get(key) + "\"");
-				bw.newLine();
+			if (properties != null) {
+				Set<String> propertiesKeys = properties.keySet();
+				for (String key : propertiesKeys) {
+					bw.append(key + "=\"" + properties.get(key) + "\"");
+					bw.newLine();
+				}
 			}
 			bw.append("> </" + shape.getClass().getSimpleName() + ">");
 			bw.newLine();
@@ -38,7 +41,7 @@ public class XmlController {
 		bw.close();
 	}
 
-	public void loadXml(ArrayList<Shape> shapes, String path)
+	public void loadXml(ArrayList<Shape> shapes, String path, List<Class<? extends Shape>> returnedClasses)
 			throws IOException, ClassNotFoundException, NoSuchMethodException, SecurityException,
 			InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		BufferedReader br = new BufferedReader(new BufferedReader(new FileReader(new File(path))));
@@ -55,11 +58,22 @@ public class XmlController {
 					properties.put(propertiesArr[0],
 							Double.parseDouble(propertiesArr[1].substring(1, propertiesArr[1].length() - 1)));
 				}
-				Class<?> clazz = Class.forName(className);
-				Constructor<?> ctor = clazz.getConstructor();
-				Shape ob = (Shape) ctor.newInstance();
-				ob.setProperties(properties);
-				shapes.add(ob);
+				if (className.contains("Round")) {
+					for(Class<? extends Shape> classes : returnedClasses) {
+						if(classes.getName().contains("Round")){
+							Constructor<?> ctor = classes.getConstructor();
+							Shape ob = (Shape) ctor.newInstance();
+							ob.setProperties(properties);
+							shapes.add(ob);
+						}
+					}
+				} else {
+					Class<?> clazz = Class.forName(className);
+					Constructor<?> ctor = clazz.getConstructor();
+					Shape ob = (Shape) ctor.newInstance();
+					ob.setProperties(properties);
+					shapes.add(ob);
+				}
 			}
 		}
 	}

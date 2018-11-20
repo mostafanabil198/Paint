@@ -385,6 +385,7 @@ public class SanityTest {
         try {
             countAfter = instance2.getShapes().length;
             assertNotEquals("Engine returned no shapes, after load!", 0, countAfter);
+            System.out.println(countBefore + "  " + countAfter);
             assertEquals("Shapes count different after load!", countBefore, countAfter);
         } catch (Exception e) {
             TestRunner.fail("Failed to return shapes, after load", e);
@@ -475,5 +476,6 @@ public class SanityTest {
         }
         fail("Failed to use our new plugin!");
     }
+
     
 }

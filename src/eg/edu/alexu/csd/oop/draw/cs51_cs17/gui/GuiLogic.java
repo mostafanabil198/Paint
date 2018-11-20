@@ -19,6 +19,7 @@ import java.awt.Color;
 import java.awt.Point;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  *
@@ -182,7 +183,7 @@ public class GuiLogic {
             controller.updateShape(shape, newShape);
             paint.setSelectedShape(newShape);
         }
-        if (shape.getClass().getSimpleName().equals("Line") || shape.getClass().getSimpleName().equals("Triangle")) {
+        if (shape.getClass().getSimpleName().equals("Line") || shape.getClass().getSimpleName().contains("Triangle")) {
             double x1 = shape.getProperties().get("point1X");
             double y1 = shape.getProperties().get("point1Y");
             double x22 = shape.getProperties().get("point2X");
@@ -265,5 +266,14 @@ public class GuiLogic {
             m.put("centerX", Double.parseDouble(String.valueOf(topLeftX)));
             m.put("centerY", Double.parseDouble(String.valueOf(topLeftY)));
         }
+    }
+
+    public Map<String, Double> copyMape(Map<String, Double> prop) {
+        Map<String, Double> newMap = new HashMap<String, Double>();
+        Set<String> propertiesKeys = prop.keySet();
+        for (String key : propertiesKeys) {
+            newMap.put(key, prop.get(key));
+        }
+        return newMap;
     }
 }

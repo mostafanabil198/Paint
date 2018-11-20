@@ -10,10 +10,18 @@ import eg.edu.alexu.csd.oop.draw.Shape;
 import eg.edu.alexu.csd.oop.draw.cs51_cs17.DrawController;
 import eg.edu.alexu.csd.oop.draw.cs51_cs17.shapeHelpers.SelectShape;
 import java.awt.Color;
+import java.awt.Point;
+import java.io.File;
+import java.io.FileFilter;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -26,7 +34,7 @@ public class Paint extends javax.swing.JFrame {
     SelectShape selectShape = new SelectShape();
     GuiLogic guiLogic = new GuiLogic();
     DrawingEngine controller = new DrawController();
-    Shape shape, selectedShape, selectedBorder;
+    Shape shape, selectedShape, selectedBorder, copiedShape;
 
     public void setSelectedShape(Shape selectedShape) {
         this.selectedShape = selectedShape;
@@ -67,7 +75,10 @@ public class Paint extends javax.swing.JFrame {
         eqTriangle = new javax.swing.JLabel();
         bg = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
         undo = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         redo = new javax.swing.JLabel();
         save = new javax.swing.JLabel();
         load = new javax.swing.JLabel();
@@ -101,7 +112,7 @@ public class Paint extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 880, Short.MAX_VALUE)
+            .addGap(0, 890, Short.MAX_VALUE)
         );
 
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -219,6 +230,14 @@ public class Paint extends javax.swing.JFrame {
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel4.setText("Round Rectangle");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 30, 120, 40));
+
         undo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         undo.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -226,6 +245,20 @@ public class Paint extends javax.swing.JFrame {
             }
         });
         jPanel3.add(undo, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 20, 90, 70));
+
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 20, 70, 70));
+
+        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel2MouseClicked(evt);
+            }
+        });
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 20, 70, 70));
 
         redo.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         redo.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -241,7 +274,7 @@ public class Paint extends javax.swing.JFrame {
                 saveMouseClicked(evt);
             }
         });
-        jPanel3.add(save, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, 70, 70));
+        jPanel3.add(save, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 80, 70));
 
         load.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         load.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -249,9 +282,9 @@ public class Paint extends javax.swing.JFrame {
                 loadMouseClicked(evt);
             }
         });
-        jPanel3.add(load, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 60, 70));
+        jPanel3.add(load, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 70, 70));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eg/edu/alexu/csd/oop/draw/cs51_cs17/gui/22.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/eg/edu/alexu/csd/oop/draw/cs51_cs17/gui/1212121.png"))); // NOI18N
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -283,37 +316,33 @@ public class Paint extends javax.swing.JFrame {
     private void lineMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lineMouseClicked
         orderName = "draw";
         shapeNameToDraw = "Line";
-        selectedShape = null;
     }//GEN-LAST:event_lineMouseClicked
 
     private void rightTriangleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rightTriangleMouseClicked
         orderName = "draw";
         shapeNameToDraw = "RightTriangle";
-        selectedShape = null;
     }//GEN-LAST:event_rightTriangleMouseClicked
 
     private void rectangleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rectangleMouseClicked
         orderName = "draw";
         shapeNameToDraw = "Rectangle";
-        selectedShape = null;
     }//GEN-LAST:event_rectangleMouseClicked
 
     private void squareMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_squareMouseClicked
         orderName = "draw";
         shapeNameToDraw = "Square";
-        selectedShape = null;
+
     }//GEN-LAST:event_squareMouseClicked
 
     private void circleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_circleMouseClicked
         orderName = "draw";
         shapeNameToDraw = "Circle";
-        selectedShape = null;
     }//GEN-LAST:event_circleMouseClicked
 
     private void ellipseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ellipseMouseClicked
         orderName = "draw";
         shapeNameToDraw = "Ellipse";
-        selectedShape = null;
+
     }//GEN-LAST:event_ellipseMouseClicked
 
     private void selectMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_selectMouseClicked
@@ -332,20 +361,42 @@ public class Paint extends javax.swing.JFrame {
         if (selectedShape != null) {
             controller.removeShape(selectedShape);
             selectedShape = null;
+            if (selecting != null) {
+                controller.removeShape(selecting);
+            }
+            selecting = null;
             repaint();
         }
     }//GEN-LAST:event_deleteMouseClicked
 
     private void saveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_saveMouseClicked
-        FileChooser chooser = new FileChooser();
-        chooser.jFileChooser1.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        System.out.println(chooser.jFileChooser1.getCurrentDirectory());
-        chooser.setVisible(true);
+        FileChooser fileChooser = new FileChooser();
+        JFileChooser chooser = fileChooser.jFileChooser1;
+        chooser.showSaveDialog(fileChooser);
+        File f = chooser.getSelectedFile();
+        controller.save(f.getPath());
         repaint();
     }//GEN-LAST:event_saveMouseClicked
 
     private void loadMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loadMouseClicked
-        controller.load("sasaaa.xml");
+        FileChooser fileChooser = new FileChooser();
+        JFileChooser chooser = fileChooser.jFileChooser1;
+        chooser.setAcceptAllFileFilterUsed(false);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("paint files", "xml", "json");
+//        FileNameExtensionFilter filter1 = new FileNameExtensionFilter("json", "json");
+        chooser.setFileFilter(filter);
+
+        chooser.showOpenDialog(fileChooser);
+        File f = chooser.getSelectedFile();
+        if (f != null && !f.getName().isEmpty()) {
+            controller.load(f.getPath());
+
+            selectedShape = null;
+            if (selecting != null) {
+                controller.removeShape(selecting);
+            }
+            selecting = null;
+        }
         repaint();
     }//GEN-LAST:event_loadMouseClicked
 
@@ -353,37 +404,114 @@ public class Paint extends javax.swing.JFrame {
         x1 = evt.getXOnScreen() - jPanel1.getX();
         y1 = evt.getYOnScreen() - jPanel1.getY() - 30;
         if (orderName.equals("draw")) {
+            selectedShape = null;
+            if (selecting != null) {
+                controller.removeShape(selecting);
+            }
+            selecting = null;
             shape = guiLogic.generateShape(shapeNameToDraw);
             guiLogic.drawShapes(shape, x1, y1, x1, y1, shapeColor, fillColor);
             controller.addShape(shape);
             repaint();
-        } else if (orderName.equals("move") && selectedShape != null) {
+        } else if (orderName.equals("move") && selectedShape != null && selectedShape != selecting) {
             try {
                 guiLogic.moveShape(selectedShape, this, x1, y1, true, controller);
+                selecting.setProperties(guiLogic.copyMape(selectedShape.getProperties()));
+                if (!selecting.getClass().getSimpleName().contains("Triangle") && !selecting.getClass().getSimpleName().contains("Line")) {
+                    selecting.getProperties().put("width", selectedShape.getProperties().get("width") + 5);
+                    selecting.getProperties().put("height", selectedShape.getProperties().get("height") + 5);
+                } else {
+                    selecting.getProperties().put("point1X", selectedShape.getProperties().get("point1X") + 5);
+                    selecting.getProperties().put("point1Y", selectedShape.getProperties().get("point1Y") - 5);
+                    selecting.getProperties().put("point2X", selectedShape.getProperties().get("point2X") - 5);
+                    selecting.getProperties().put("point2Y", selectedShape.getProperties().get("point2Y") + 5);
+                    if (selecting.getClass().getSimpleName().contains("Triangle")) {
+                        selecting.getProperties().put("point3X", selectedShape.getProperties().get("point3X") + 5);
+                        selecting.getProperties().put("point3Y", selectedShape.getProperties().get("point3Y") + 5);
+                    }
+                }
+                selecting.getProperties().put("fillColor", Double.parseDouble(String.valueOf(Integer.MAX_VALUE)));
+                selecting.getProperties().put("shapeColor", Double.parseDouble(String.valueOf(Color.red.getRGB())));
+
             } catch (CloneNotSupportedException ex) {
                 Logger.getLogger(Paint.class.getName()).log(Level.SEVERE, null, ex);
             }
             repaint();
-        } else if (orderName.equals("resize") && selectedShape != null) {
+        } else if (orderName.equals("resize") && selectedShape != null && selectedShape != selecting) {
             try {
                 guiLogic.resizeShape(selectedShape, this, x1, y1, false, controller);
+                selecting.setProperties(guiLogic.copyMape(selectedShape.getProperties()));
+                if (!selecting.getClass().getSimpleName().contains("Triangle") && !selecting.getClass().getSimpleName().contains("Line")) {
+                    selecting.getProperties().put("width", selectedShape.getProperties().get("width") + 5);
+                    selecting.getProperties().put("height", selectedShape.getProperties().get("height") + 5);
+                } else {
+                    selecting.getProperties().put("point1X", selectedShape.getProperties().get("point1X") + 5);
+                    selecting.getProperties().put("point1Y", selectedShape.getProperties().get("point1Y") - 5);
+                    selecting.getProperties().put("point2X", selectedShape.getProperties().get("point2X") - 5);
+                    selecting.getProperties().put("point2Y", selectedShape.getProperties().get("point2Y") + 5);
+                    if (selecting.getClass().getSimpleName().contains("Triangle")) {
+                        selecting.getProperties().put("point3X", selectedShape.getProperties().get("point3X") + 5);
+                        selecting.getProperties().put("point3Y", selectedShape.getProperties().get("point3Y") + 5);
+                    }
+                }
+                selecting.getProperties().put("fillColor", Double.parseDouble(String.valueOf(Integer.MAX_VALUE)));
+                selecting.getProperties().put("shapeColor", Double.parseDouble(String.valueOf(Color.red.getRGB())));
             } catch (CloneNotSupportedException ex) {
                 Logger.getLogger(Paint.class.getName()).log(Level.SEVERE, null, ex);
             }
             repaint();
         }
     }//GEN-LAST:event_jPanel1MousePressed
-
+    Shape selecting;
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
+        double x3 = evt.getXOnScreen() - jPanel1.getX();
+        double y3 = evt.getYOnScreen() - jPanel1.getY() - 30;
         if (orderName.equals("select")) {
             selectedShape = selectShape.selectShape(evt.getXOnScreen() - jPanel1.getX(), evt.getYOnScreen() - jPanel1.getY() - 30, controller.getShapes());
-            if (selectedShape == null) {
-                System.out.println("null !");
+            if (selectedShape == null || selectedShape == selecting) {
+                if (selecting != null) {
+                    controller.removeShape(selecting);
+                }
+                selecting = null;
+                selectedShape = null;
+                repaint();
             } else {
-                selectedShape.getProperties().put("shapeColor", Double.parseDouble(String.valueOf((Color.BLUE).getRGB())));
-                selectedShape.getProperties().put("fillColor", Double.parseDouble(String.valueOf((Color.BLUE).getRGB())));
+//                selectedShape.getProperties().put("shapeColor", Double.parseDouble(String.valueOf((Color.BLUE).getRGB())));
+//                selectedShape.getProperties().put("fillColor", Double.parseDouble(String.valueOf((Color.BLUE).getRGB())));
+                if (selecting != null) {
+                    controller.removeShape(selecting);
+                    selecting = null;
+                }
+                selecting = guiLogic.generateShape(selectedShape.getClass().getSimpleName());
+                selecting.setProperties(guiLogic.copyMape(selectedShape.getProperties()));
+                if (!selecting.getClass().getSimpleName().contains("Triangle") && !selecting.getClass().getSimpleName().equals("Line")) {
+                    selecting.getProperties().put("width", selectedShape.getProperties().get("width") + 5);
+                    selecting.getProperties().put("height", selectedShape.getProperties().get("height") + 5);
+                } else {
+                    selecting.getProperties().put("point1X", selectedShape.getProperties().get("point1X") + 5);
+                    selecting.getProperties().put("point1Y", selectedShape.getProperties().get("point1Y") - 5);
+                    selecting.getProperties().put("point2X", selectedShape.getProperties().get("point2X") - 5);
+                    selecting.getProperties().put("point2Y", selectedShape.getProperties().get("point2Y") + 5);
+                    if (selecting.getClass().getSimpleName().contains("Triangle")) {
+                        selecting.getProperties().put("point3X", selectedShape.getProperties().get("point3X") + 5);
+                        selecting.getProperties().put("point3Y", selectedShape.getProperties().get("point3Y") + 5);
+                    }
+                }
+                selecting.getProperties().put("fillColor", Double.parseDouble(String.valueOf(Integer.MAX_VALUE)));
+                selecting.getProperties().put("shapeColor", Double.parseDouble(String.valueOf(Color.red.getRGB())));
+                controller.addShape(selecting);
                 repaint();
             }
+        } else if (orderName.equals("paste")) {
+            try {
+                Shape pastedShape = (Shape) copiedShape.clone();
+                controller.addShape(pastedShape);
+                pastedShape.setPosition(new Point((int) x3, (int) y3));
+                repaint();
+            } catch (CloneNotSupportedException ex) {
+                Logger.getLogger(Paint.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         }
     }//GEN-LAST:event_jPanel1MouseClicked
 
@@ -393,16 +521,48 @@ public class Paint extends javax.swing.JFrame {
         if (orderName.equals("draw")) {
             guiLogic.drawShapes(shape, x1, y1, x2, y2, shapeColor, fillColor);
             repaint();
-        } else if (orderName.equals("move") && selectedShape != null) {
+        } else if (orderName.equals("move") && selectedShape != null && selectedShape != selecting) {
             try {
                 guiLogic.moveShape(selectedShape, this, x2, y2, false, controller);
+                selecting.setProperties(guiLogic.copyMape(selectedShape.getProperties()));
+                if (!selecting.getClass().getSimpleName().contains("Triangle") && !selecting.getClass().getSimpleName().contains("Line")) {
+                    selecting.getProperties().put("width", selectedShape.getProperties().get("width") + 5);
+                    selecting.getProperties().put("height", selectedShape.getProperties().get("height") + 5);
+                } else {
+                    selecting.getProperties().put("point1X", selectedShape.getProperties().get("point1X") + 5);
+                    selecting.getProperties().put("point1Y", selectedShape.getProperties().get("point1Y") - 5);
+                    selecting.getProperties().put("point2X", selectedShape.getProperties().get("point2X") - 5);
+                    selecting.getProperties().put("point2Y", selectedShape.getProperties().get("point2Y") + 5);
+                    if (selecting.getClass().getSimpleName().contains("Triangle")) {
+                        selecting.getProperties().put("point3X", selectedShape.getProperties().get("point3X") + 5);
+                        selecting.getProperties().put("point3Y", selectedShape.getProperties().get("point3Y") + 5);
+                    }
+                }
+                selecting.getProperties().put("fillColor", Double.parseDouble(String.valueOf(Integer.MAX_VALUE)));
+                selecting.getProperties().put("shapeColor", Double.parseDouble(String.valueOf(Color.red.getRGB())));
             } catch (CloneNotSupportedException ex) {
                 Logger.getLogger(Paint.class.getName()).log(Level.SEVERE, null, ex);
             }
             repaint();
-        } else if (orderName.equals("resize") && selectedShape != null) {
+        } else if (orderName.equals("resize") && selectedShape != null && selectedShape != selecting) {
             try {
                 guiLogic.resizeShape(selectedShape, this, x2, y2, true, controller);
+                selecting.setProperties(guiLogic.copyMape(selectedShape.getProperties()));
+                if (!selecting.getClass().getSimpleName().contains("Triangle") && !selecting.getClass().getSimpleName().contains("Line")) {
+                    selecting.getProperties().put("width", selectedShape.getProperties().get("width") + 5);
+                    selecting.getProperties().put("height", selectedShape.getProperties().get("height") + 5);
+                } else {
+                    selecting.getProperties().put("point1X", selectedShape.getProperties().get("point1X") + 5);
+                    selecting.getProperties().put("point1Y", selectedShape.getProperties().get("point1Y") - 5);
+                    selecting.getProperties().put("point2X", selectedShape.getProperties().get("point2X") - 5);
+                    selecting.getProperties().put("point2Y", selectedShape.getProperties().get("point2Y") + 5);
+                    if (selecting.getClass().getSimpleName().contains("Triangle")) {
+                        selecting.getProperties().put("point3X", selectedShape.getProperties().get("point3X") + 5);
+                        selecting.getProperties().put("point3Y", selectedShape.getProperties().get("point3Y") + 5);
+                    }
+                }
+                selecting.getProperties().put("fillColor", Double.parseDouble(String.valueOf(Integer.MAX_VALUE)));
+                selecting.getProperties().put("shapeColor", Double.parseDouble(String.valueOf(Color.red.getRGB())));
             } catch (CloneNotSupportedException ex) {
                 Logger.getLogger(Paint.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -447,6 +607,54 @@ public class Paint extends javax.swing.JFrame {
         shapeNameToDraw = "EquilateralTriangle";
         selectedShape = null;
     }//GEN-LAST:event_eqTriangleMouseClicked
+
+    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
+        if (selectedShape != null) {
+            try {
+                copiedShape = (Shape) selectedShape.clone();
+            } catch (CloneNotSupportedException ex) {
+                Logger.getLogger(Paint.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        orderName = "paste";
+    }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        for (Class<? extends Shape> classes : controller.getSupportedShapes()) {
+            if (classes.getName().contains("Round")) {
+                try {
+                    Map<String, Double> properties = new HashMap<>();
+                    properties.put("Length", 300.0);
+                    properties.put("ArcWidth", 50.0);
+                    properties.put("ArcLength", 50.0);
+                    properties.put("Width", 300.0);
+                    Constructor<?> ctor = classes.getConstructor();
+                    Shape ob = (Shape) ctor.newInstance();
+                    ob.setProperties(properties);
+                    ob.setPosition(new Point(250, 250));
+                    ob.setColor(shapeColor);
+                    ob.setFillColor(fillColor);
+                    controller.addShape(ob);
+                    repaint();
+                } catch (NoSuchMethodException ex) {
+                    Logger.getLogger(Paint.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SecurityException ex) {
+                    Logger.getLogger(Paint.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InstantiationException ex) {
+                    Logger.getLogger(Paint.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalAccessException ex) {
+                    Logger.getLogger(Paint.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IllegalArgumentException ex) {
+                    Logger.getLogger(Paint.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InvocationTargetException ex) {
+                    Logger.getLogger(Paint.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     public void setColorFor(String colorFor, Color color) throws CloneNotSupportedException {
         if (colorFor.equals("fillColor")) {
@@ -512,6 +720,9 @@ public class Paint extends javax.swing.JFrame {
     private javax.swing.JLabel eqTriangle;
     private javax.swing.JLabel fillColorr;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -3,6 +3,7 @@ package eg.edu.alexu.csd.oop.draw.cs51_cs17.shapeHelpers;
 import java.util.Map;
 
 import eg.edu.alexu.csd.oop.draw.Shape;
+import java.awt.Point;
 
 public class SelectShape {
 
@@ -31,6 +32,8 @@ public class SelectShape {
                 case "Rectangle":
                     shape = selectRectangle(shapes[i], x, y);
                     break;
+                default:
+                    break;
             }
             if (shape != null) {
                 break;
@@ -42,7 +45,7 @@ public class SelectShape {
     private Shape selectCircle(Shape s, float x, float y) {
         double topX = s.getProperties().get("centerX");
         double topY = s.getProperties().get("centerY");
-        double radius = s.getProperties().get("width")/2;
+        double radius = s.getProperties().get("width") / 2;
         double centerX = (topX + radius);
         double centerY = (topY + radius);
         double diffx = Math.abs(x - centerX);
@@ -56,8 +59,8 @@ public class SelectShape {
     private Shape selectEllipse(Shape s, float x, float y) {
         double topX = s.getProperties().get("centerX");
         double topY = s.getProperties().get("centerY");
-        double radiusA = s.getProperties().get("width")/2;
-        double radiusB = s.getProperties().get("height")/2;
+        double radiusA = s.getProperties().get("width") / 2;
+        double radiusB = s.getProperties().get("height") / 2;
         double centerX = topX + radiusA;
         double centerY = topY + radiusB;
         double diffX = Math.abs(x - centerX);
@@ -75,7 +78,7 @@ public class SelectShape {
         double endPointY = s.getProperties().get("point2Y");
         double firstRatio = (x - sPointX) / (y - sPointY);
         double secondRatio = (x - endPointX) / (y - endPointY);
-        if (Math.abs(Math.abs(firstRatio) - Math.abs(secondRatio)) < Math.pow(10, -4)) {
+        if (Math.abs(Math.abs(firstRatio) - Math.abs(secondRatio)) < 1) {
             return s;
         } else {
             return null;
@@ -102,10 +105,13 @@ public class SelectShape {
     }
 
     private Shape selectRectangle(Shape s, float x, float y) {
-        double topLX = s.getProperties().get("centerX");
-        double topLY = s.getProperties().get("centerY");
-        double bottomRX = topLX + s.getProperties().get("width");
-        double bottomRY = topLY + s.getProperties().get("height");
+        Point p = s.getPosition();
+        double topLX = p.x;
+        double topLY = p.y;
+        double bottomRX;
+        double bottomRY;
+        bottomRX = topLX + s.getProperties().get("width");
+        bottomRY = topLY + s.getProperties().get("height");
         if (x <= bottomRX && x >= topLX && y >= topLY && y <= bottomRY) {
             return s;
         }
